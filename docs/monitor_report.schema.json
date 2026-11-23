@@ -1,0 +1,328 @@
+{
+  "$defs": {
+    "EvaluatorObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "validity": {
+          "enum": [
+            "valid",
+            "pending",
+            "operational_failure"
+          ],
+          "title": "Validity",
+          "type": "string"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "preconditions_verified": {
+          "title": "Preconditions Verified",
+          "type": "boolean"
+        },
+        "post_state": {
+          "additionalProperties": true,
+          "title": "Post State",
+          "type": "object"
+        },
+        "stable_post": {
+          "title": "Stable Post",
+          "type": "boolean"
+        },
+        "symptom": {
+          "default": "",
+          "title": "Symptom",
+          "type": "string"
+        },
+        "device_unavailable": {
+          "default": false,
+          "title": "Device Unavailable",
+          "type": "boolean"
+        },
+        "control_supported": {
+          "default": false,
+          "title": "Control Supported",
+          "type": "boolean"
+        },
+        "response_class": {
+          "title": "Response Class",
+          "type": "string"
+        },
+        "latency_ms": {
+          "minimum": 0,
+          "title": "Latency Ms",
+          "type": "number"
+        },
+        "baseline_latency_ms": {
+          "minimum": 0,
+          "title": "Baseline Latency Ms",
+          "type": "number"
+        },
+        "extra_retries": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Extra Retries",
+          "type": "integer"
+        },
+        "oracle_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Oracle Id"
+        },
+        "oracle_violation": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Oracle Violation"
+        },
+        "persistent": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Persistent"
+        },
+        "environment_healthy": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Environment Healthy"
+        },
+        "recovery_verified": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recovery Verified"
+        },
+        "recovery_performed": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recovery Performed"
+        },
+        "event_rejected": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Event Rejected"
+        },
+        "implicated_predicates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Implicated Predicates",
+          "type": "array"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Ids",
+          "type": "array"
+        },
+        "detection_step_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detection Step Id"
+        }
+      },
+      "required": [
+        "validity",
+        "purpose",
+        "preconditions_verified",
+        "post_state",
+        "stable_post",
+        "response_class",
+        "latency_ms",
+        "baseline_latency_ms"
+      ],
+      "title": "EvaluatorObservation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "monitor-v1",
+      "default": "monitor-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "identity": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Identity",
+      "type": "object"
+    },
+    "execution": {
+      "additionalProperties": true,
+      "title": "Execution",
+      "type": "object"
+    },
+    "state": {
+      "additionalProperties": true,
+      "title": "State",
+      "type": "object"
+    },
+    "liveness": {
+      "additionalProperties": true,
+      "title": "Liveness",
+      "type": "object"
+    },
+    "traffic": {
+      "additionalProperties": true,
+      "title": "Traffic",
+      "type": "object"
+    },
+    "oracle": {
+      "additionalProperties": true,
+      "title": "Oracle",
+      "type": "object"
+    },
+    "observations": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "evaluator_input": {
+      "$ref": "#/$defs/EvaluatorObservation"
+    },
+    "analysis": {
+      "additionalProperties": true,
+      "title": "Analysis",
+      "type": "object"
+    },
+    "react": {
+      "additionalProperties": true,
+      "title": "React",
+      "type": "object"
+    },
+    "uncertainty": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Uncertainty",
+      "type": "array"
+    },
+    "source_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Ids",
+      "type": "array"
+    },
+    "brief": {
+      "type": "object",
+      "description": "简版报告约定：6 个固定字段 case_id/post_state/stable_post/liveness/symptom/source_ids，可选 extra_evidence 与 uncertainty（仅有内容时出现）",
+      "properties": {
+        "case_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "post_state": {
+          "type": "object"
+        },
+        "stable_post": {
+          "type": "boolean"
+        },
+        "liveness": {
+          "type": "string",
+          "enum": [
+            "alive",
+            "unresponsive",
+            "unknown"
+          ]
+        },
+        "symptom": {
+          "type": "string"
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extra_evidence": {
+          "type": "object"
+        },
+        "uncertainty": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "identity",
+    "execution",
+    "state",
+    "liveness",
+    "traffic",
+    "oracle",
+    "observations",
+    "evaluator_input",
+    "analysis",
+    "react",
+    "uncertainty",
+    "source_ids"
+  ],
+  "title": "MonitorReport",
+  "type": "object"
+}
